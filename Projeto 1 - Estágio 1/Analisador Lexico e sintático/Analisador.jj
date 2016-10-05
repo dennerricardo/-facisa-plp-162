@@ -1,0 +1,381 @@
+options {
+  JDK_VERSION = "1.5";
+  STATIC = false;
+}
+
+PARSER_BEGIN(Analisador) 
+
+public class Analisador {
+
+    public void processa() throws Exception {
+        while (true) {
+            Token t = getNextToken();
+            String nomeToken = tokenImage[t.kind];
+            System.out.println(nomeToken);
+            if (t.kind == PONTOEVIRGULA) 
+                break;
+        }
+    }
+
+   public static void main(String[] args) {
+            System.out.print("Input:");
+            Analisador analisador = new Analisador(System.in);
+            try {
+                analisador.processa(); 
+            } catch (Exception e) {
+                  System.out.println(e.getMessage());
+                  e.printStackTrace();
+            }
+      }
+}
+PARSER_END(Analisador) 
+
+SKIP : 
+{ 
+	" "|"\n" | "\r" | "\r\n" 
+}
+TOKEN:
+{
+	  <TIPOS:"currency"|"comp"|"extended"|"double"|"single"|"real"|"boolean"|"char"|"string"|"array"|"record"|"file"|"byte"|"shortint"|"smallint"|"word"|"integer"|"cardinal"|"logint"|"longword"|"int64"|"qwrod">{System.out.println("TIPOS -> "+image);}
+	| <NUMEROS : (["0"-"9"])+ > {System.out.print("NUMEROS "+image+"\r\n");}
+	| <IDENTIFICADOR : ["a"-"z","A"-"Z"](["a"-"z","A"-"Z","0"-"9","_"])*> {System.out.print("IDENTIFICADOR -> "+image+"\r\n");}
+	| <STRING : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*>{System.out.print("STRING -> "+image+"\r\n");}
+    | <PALAVRAS_RESERVADAS :"absolute"|"asm"|"const"|"constructor"|"file"|"fuction"|"implementation"|"in"|"inherited"|"inline"|"interface"|"label"|"nil"|"object"|"of"|"on"|"operador"|"packed"|"procedure"|"record"|"reintroduce"|"self"|"set"|"shl"|"shr"|"to"|"uses"|"var"|"with"|"xor"|"abs"|"arctan"|"chr"|"concat"|"copy"|"cos"|"dec"|"delete"|"frac"|"inc"|"insert"|"int"|"length"|"log"|"write"|"writeln"| "read">{System.out.print("PALAVRAS_RESERVADAS -> "+image+"\r\n");}
+    
+   
+    
+}
+TOKEN : 
+{ 
+	   <IGUALDADE : "= "> {System.out.println("IGUALDADE  ->"+image+"\r\n");}
+      |<MENORQUE : "<" > {System.out.println("MENORQUE ->"+image+"\r\n");}
+      |<MAIORQUE : ">"> {System.out.println("MAIORQUE ->"+image+"\r\n");}
+      |<MENORIGUAL : "<= "> {System.out.println("MENORIGUAL ->"+image+"\r\n");}
+      |<MAIORIGUAL : ">= "> {System.out.println("MAIORIGUAL ->"+image+"\r\n");}
+      |<DIVISAO : "/ "> {System.out.println("DIVISAO -> "+image+"\r\n");}
+      |<SOMA : "+ "> {System.out.println("SOMA -> "+image+"\r\n");}
+      |<SUBTRACAO : "- "> {System.out.println("SUBTRACAO -> "+image+"\r\n");}
+      |<MULTIPLICACAO : "* "> {System.out.println("MUTIPLICACAO -> "+image+"\r\n");}
+      |<DIVISAO_INTEIRA : "div "> {System.out.println("DIVISAO_INTEIRA -> "+image+"\r\n");}
+      |<RESTO : "mod "> {System.out.println("RESTO -> "+image+"\r\n");}
+      |<DPONTOIGUAL : ":= "> {System.out.println("DPONTOIGUAL ->  "+image+"\r\n");}
+      |<MAISIGUAL : "+= "> {System.out.println("MAISIGUAL -> "+image+"\r\n");}
+      |<MENOSIGUAL : "-= "> {System.out.println("MENOSIGUAL -> "+image+"\r\n");}
+      |<MULTIIGUAL : "*= "> {System.out.println("MULTIIGUAL -> "+image+"\r\n");}
+      |<PARENTMULTI : "(* "> {System.out.println("PARENTMULTI -> "+image+"\r\n");}
+      |<MULTIPARENT : "*) "> {System.out.println("MULTIPARENT -> "+image+"\r\n");}
+      |<PARENTPONTO : "(. "> {System.out.println("PARENTPONTO -> "+image+"\r\n");}
+      |<PONTOPARENT : ".) "> {System.out.println("PONTOPARENT -> "+image+"\r\n");}
+      |<BARRABARRA : "// "> {System.out.println("BARRABARRA -> "+image+"\r\n");}
+      
+      
+      
+	
+}
+TOKEN:
+{
+	  <MAIN: "public static void Main() ">{System.out.println("MAIN -> "+image);}
+	| <PROGRAMA: "Programa " > {System.out.println("PROGRAMA -> "+image);}
+	| <IF: "if " >{System.out.println("IF -> "+image);}
+    | <THEN: "then " >{System.out.println("THEN -> "+image);}
+    | <ELSE: "else " >{System.out.println("ELSE -> "+image);}
+    | <WHILE: "while " >{System.out.println("WHILE -> "+image);}
+    | <DO: "do " >{System.out.println("DO -> "+image);}
+    | <FOR: "for " >{System.out.println("FOR -> "+image);}
+    | <REPEAT: "repeat " >{System.out.println("REPEAT -> "+image);}
+    | <UNTIL: "until " >{System.out.println("UNTIL -> "+image);}
+    | <GOTO: "goto " >{System.out.println("GOTO -> "+image);}
+    | <AND: "and " >{System.out.println("AND -> "+image);}
+    | <BEGIN: "begin " >{System.out.println("BEGIN -> "+image);}
+    | <BREAK: "break " >{System.out.println("BREAK -> "+image);}
+    | <CONTINUE: "continue " >{System.out.println("CONTINUE -> "+image);}
+    | <DOWNTO: "downto " >{System.out.println("DOWNTO -> "+image);}
+    | <END: "end " >{System.out.println("END -> "+image);}
+    | <ENDPONTO: "end. " >{System.out.println("ENDPONTO -> "+image);}
+    | <NOT: "not " >{System.out.println("NOT -> "+image);}
+    | <OR: "or " >{System.out.println("OR -> "+image);}
+    | <TRUE: "true " >{System.out.println("TRUE -> "+image);}
+    | <FALSE: "false " >{System.out.println("FALSE -> "+image);}
+    
+    
+    
+}
+TOKEN:
+{
+      <EPAREN: "(" >{System.out.println("EPAREN -> "+image);}
+	| <DPAREN: ")" >{System.out.println("DPAREN -> "+image);}
+	| <ECHAVE: "{" >{System.out.println("ECHAVE -> "+image);}
+	| <DCHAVE: "}" >{System.out.println("DCHAVE -> "+image);}
+    | <EBRACKETS: "[" >{System.out.println("EBRACKETS -> "+image);}
+    | <DBRACKETS: "]" >{System.out.println("DBRACKETS -> "+image);}
+    | <PONTO: "." >{System.out.println("PONTO -> "+image);}
+    | <DPONTOS: ":" >{System.out.println("DPONTOS -> "+image);}
+    | <AROBA: "@" >{System.out.println("AROBA -> "+image);}
+    | <CIFRAO: "$" >{System.out.println("CIFRAO -> "+image);}
+    | <HASHTAG: "#" >{System.out.println("HASHTAG -> "+image);}
+    | <ACENTO: "^" >{System.out.println("ACENTO -> "+image);}
+    | <VIRGULA: "," >{System.out.println("VIRGULA -> "+image);}
+    | <ASPASNORMAL: "\"">{System.out.println("ASPASNORMAL -> "+image);}
+    | <ASPAS: "'" >{System.out.println("ASPAS -> "+image);}
+	| <PONTOEVIRGULA: ";" >{System.out.println("PONTO E VIRGULA -> "+image);}
+}
+/* LEXICO */
+
+/* SINTÁTICO */
+
+void Programa() :
+{}
+{
+	<PROGRAMA><IDENTIFICADOR><EPAREN><DPAREN><EOF>	
+}
+
+void block() :
+{}
+{
+	variableDeclarationPart()statementPart()	
+}
+
+void variableDeclarationPart() :
+{}
+{
+	<EOF>|<PALAVRAS_RESERVADAS>variableDeclaration()<PONTOEVIRGULA>
+    (variableDeclaration()<PONTOEVIRGULA>)*
+}
+
+void variableDeclaration() :
+{}
+{
+	<IDENTIFICADOR>(<VIRGULA><IDENTIFICADOR>)<DPONTOS>type()	
+}
+
+void type() :
+{}
+{
+	<TIPOS> | arrayType()	
+}
+
+void arrayType():
+{}
+{
+	<TIPOS><EBRACKETS>indexRange()<DBRACKETS><PALAVRAS_RESERVADAS><TIPOS>
+}
+
+void indexRange():
+{}
+{
+	<NUMEROS><PONTO><PONTO><NUMEROS>
+}
+
+void simpleType():
+{}
+{
+	<TIPOS>|<TIPOS>|<TIPOS>
+}
+
+void typeIndetifier():
+{}
+{
+	<IDENTIFICADOR>
+}
+
+void statementPart():
+{}
+{
+	compoundStatement()
+}
+
+void compoundStatement():
+{}
+{
+	<BEGIN>statement()(<PONTOEVIRGULA>statement())*<END>
+}
+
+void statement():
+{}
+{
+	simpleStatement()|structuredStatement()
+}
+
+void simpleStatement():
+{}
+{
+	assigmentStatement()|readStatement()|writeStatement()
+}
+
+void assigmentStatement():
+{}
+{
+	variable() <DPONTOIGUAL> expression()
+}
+
+void readStatement():
+{}
+{
+	 <PALAVRAS_RESERVADAS><EPAREN>variable()(<VIRGULA>variable())*<DPAREN>
+}
+
+void writeStatement():
+{}
+{
+	 <PALAVRAS_RESERVADAS><EPAREN>variable()(<VIRGULA>variable())*<DPAREN>
+    
+}
+void structuredStatement():
+{}
+{
+	 compoundStatement()|ifStatement()|whileStatement()
+    
+}
+void ifStatement():
+{}
+{
+	 <IF> expression()<THEN>statement()|<IF> expression()<THEN>statement() <ELSE> statement()
+    
+}
+void whileStatement():
+{}
+{
+	 <WHILE>expression()<DO>statement()
+    
+}
+
+void expression():
+{}
+{
+	 simpleExpression()|simpleExpression()relationalOperator()simpleExpression()
+    
+}
+
+void simpleExpression():
+{}
+{
+	 sign()term() (addingOperator()term())*
+    
+}
+
+void term():
+{}
+{
+	 factor()(multiplyingOperator()factor())*
+}
+
+void factor():
+{}
+{
+	 variable()|constant()|<EPAREN>expression()<DPAREN>|<NOT>factor()
+}
+
+
+void relationalOperator():
+{}
+{
+  	<IGUALDADE>|<MENORQUE>|<MENORIGUAL>|<MAIORIGUAL>|<MAIORQUE>|<OR>| <AND>
+}
+
+void sign():
+{}
+{
+	 <SOMA>|<SUBTRACAO>|<EOF>
+}
+
+void addingOperator():
+{}
+{
+	 <SOMA>|<SUBTRACAO>
+}
+
+void multiplyingOperator():
+{}
+{
+	 <MULTIPLICACAO>|<DIVISAO_INTEIRA>
+}
+void variable():
+{}
+{
+  	<IDENTIFICADOR>indexedVariable()
+}
+
+void indexedVariable():
+{}
+{
+  	<EBRACKETS>expression()<DBRACKETS> | {}
+}
+
+void arrayVariable():
+{}
+{
+  	entireVariable()
+}
+
+void entireVariable():
+{}
+{
+	variableIdentifier()
+}
+
+void variableIdentifier():
+{}
+{
+  	identifier()
+}
+
+void constant():
+{}
+{
+  	<NUMEROS>|characterConstant()|constantIdentifier()
+}
+
+void constantIdentifier():
+{}
+{
+	identifier()
+}
+
+void identifier():
+{}
+{
+    letter()(letterOrDigit())*
+}
+
+void letterOrDigit():
+{}
+{
+    letter()|digit()
+}
+
+void integerConstant():
+{}
+{
+    digit()(digit())*
+}
+
+void characterConstant():
+{}
+{
+  	<ASPAS>letterOrDigit()<ASPAS>|<ASPASNORMAL>letterOrDigit()(letterOrDigit())*<ASPASNORMAL>
+}
+
+void letter():
+{}
+{
+  	<STRING>
+}
+
+void digit():
+{}
+{
+  	<NUMEROS>
+}
+
+/* SINTÁTICO */
+
+
+
+
+
+
+
+
+
+
+
